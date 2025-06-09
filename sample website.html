@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Grid with Categories, Sorting & Pagination</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #222;
+    }
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .controls > * {
+      margin: 0 8px 12px 8px;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgb(0 123 255 / 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+      user-select: none;
+    }
+    button:hover:not(:disabled) {
+      background: #0056b3;
+      box-shadow: 0 6px 20px rgb(0 86 179 / 0.6);
+      transform: translateY(-2px);
+    }
+    button:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgb(0 123 255 / 0.4);
+    }
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    input[type=number], select {
+      width: 140px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    select {
+      cursor: pointer;
+    }
+
+    #productList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-height: 700px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgb(0 0 0 / 0.05);
+    }
+
+    #productList::-webkit-scrollbar {
+      width: 8px;
+    }
+    #productList::-webkit-scrollbar-thumb {
+      background-color: #007bffaa;
+      border-radius: 10px;
+    }
+    #productList::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    .product-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px 25px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.07);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-box:hover {
+      box-shadow: 0 10px 25px rgb(0 123 255 / 0.25);
+      transform: translateY(-5px);
+    }
+
+    .product-signno {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #007bff;
+      margin-bottom: 10px;
+      letter-spacing: 0.8px;
+    }
+
+    .product-name {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+      color: #222;
+      line-height: 1.2;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      color: #28a745;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .product-date {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    .product-category {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 600;
+    }
+
+    /* ✅ Centered pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 0;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .pagination button.active {
+      background: #28a745;
+      box-shadow: 0 4px 10px rgb(40 167 69 / 0.6);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 30px 15px;
+      }
+      button {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+        margin: 6px 4px 6px 4px;
+      }
+      .product-name {
+        font-size: 1.1rem;
+      }
+      input[type=number], select {
+        width: 120px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<h2>Product Grid with Categories, Sorting & Pagination</h2>
+
+<div class="controls" aria-label="Sorting and filtering controls">
+  <select id="categorySelect" aria-label="Filter by product category">
+    <option value="all">All Categories</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Sports">Sports</option>
+    <option value="Books">Books</option>
+    <option value="Clothing">Clothing</option>
+    <option value="Home">Home</option>
+  </select>
+
+  <button id="sortSignNoBtn">Sort by Sign No.</button>
+  <button id="sortNameBtn">Sort by Name</button>
+  <button id="sortDateBtn">Sort by Date</button>
+  <button id="sortPriceBtn">Sort by Price</button>
+
+  <br />
+
+  <label for="minPrice">Min Price: $</label>
+  <input type="number" id="minPrice" min="0" step="0.01" placeholder="0" />
+  <label for="maxPrice">Max Price: $</label>
+  <input type="number" id="maxPrice" min="0" step="0.01" placeholder="500" />
+  <button id="applyFilterBtn">Apply Filter</button>
+  <button id="resetFilterBtn">Reset Filter</button>
+</div>
+
+<div id="productList" aria-live="polite" aria-label="Product list"></div>
+
+<div class="pagination" aria-label="Pagination navigation"></div>
+
+<script>
+  const categories = ['Electronics', 'Sports', 'Books', 'Clothing', 'Home'];
+  const products = [];
+  let globalSignNo = 1;
+
+  function randomDateWithinLastYear() {
+    const date = new Date();
+    date.setDate(date.getDate() - Math.floor(Math.random() * 365));
+    return date;
+  }
+
+  for (const category of categories) {
+    for (let i = 1; i <= 1000; i++) {
+      const date = randomDateWithinLastYear();
+      const price = (Math.random() * 500).toFixed(2);
+      products.push({
+        signNo: globalSignNo++,
+        name: `${category} Product ${i}`,
+        date,
+        price: parseFloat(price),
+        category
+      });
+    }
+  }
+
+  const productList = document.getElementById('productList');
+  const pagination = document.querySelector('.pagination');
+  const minPriceInput = document.getElementById('minPrice');
+  const maxPriceInput = document.getElementById('maxPrice');
+  const applyFilterBtn = document.getElementById('applyFilterBtn');
+  const resetFilterBtn = document.getElementById('resetFilterBtn');
+  const categorySelect = document.getElementById('categorySelect');
+
+  const ITEMS_PER_PAGE = 30;
+  let currentPage = 1;
+  let filteredProducts = [...products];
+
+  function renderProducts(list) {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const pageItems = list.slice(start, start + ITEMS_PER_PAGE);
+    productList.innerHTML = pageItems.map(p => `
+      <div class="product-box" role="article" tabindex="0">
+        <div class="product-signno">Sign No.: ${p.signNo}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">Price: $${p.price.toFixed(2)}</div>
+        <div class="product-date">Date: ${p.date.toISOString().split('T')[0]}</div>
+        <div class="product-category">Category: ${p.category}</div>
+      </div>
+    `).join('');
+    renderPagination(list.length);
+  }
+
+  function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    let html = `<button ${currentPage === 1 ? 'disabled' : ''}>&lt;</button>`;
+    const maxPagesToShow = 7;
+    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    let endPage = startPage + maxPagesToShow - 1;
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+    for (let i = startPage; i <= endPage; i++) {
+      html += `<button class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+    }
+    html += `<button ${currentPage === totalPages ? 'disabled' : ''}>&gt;</button>`;
+    pagination.innerHTML = html;
+
+    pagination.querySelectorAll('button').forEach(button => {
+      if (button.disabled) return;
+      button.onclick = () => {
+        if (button.textContent === '<') {
+          currentPage--;
+        } else if (button.textContent === '>') {
+          currentPage++;
+        } else {
+          currentPage = parseInt(button.textContent);
+        }
+        renderProducts(filteredProducts);
+      };
+    });
+  }
+
+  function applyFilter() {
+    const minPrice = parseFloat(minPriceInput.value);
+    const maxPrice = parseFloat(maxPriceInput.value);
+    const selectedCategory = categorySelect.value;
+
+    filteredProducts = products.filter(p => {
+      if (!isNaN(minPrice) && p.price < minPrice) return false;
+      if (!isNaN(maxPrice) && p.price > maxPrice) return false;
+      if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
+      return true;
+    });
+
+    currentPage = 1;
+    renderProducts(filteredProducts);
+  }
+
+  function resetFilter() {
+    minPriceInput.value = '';
+    maxPriceInput.value = '';
+    categorySelect.value = 'all';
+    filteredProducts = [...products];
+    currentPage = 1;
+    renderProducts(filteredProducts);
+  }
+
+  function animateSort(compareFn) {
+    productList.style.animation = 'fadeOut 0.4s forwards';
+    productList.addEventListener('animationend', () => {
+      filteredProducts.sort(compareFn);
+      currentPage = 1;
+      renderProducts(filteredProducts);
+      productList.style.animation = 'fadeIn 0.4s forwards';
+    }, { once: true });
+  }
+
+  document.getElementById('sortSignNoBtn').onclick = () => animateSort((a, b) => a.signNo - b.signNo);
+  document.getElementById('sortNameBtn').onclick = () => animateSort((a, b) => a.name.localeCompare(b.name));
+  document.getElementById('sortDateBtn').onclick = () => animateSort((a, b) => b.date - a.date);
+  document.getElementById('sortPriceBtn').onclick = () => animateSort((a, b) => a.price - b.price);
+  applyFilterBtn.addEventListener('click', applyFilter);
+  resetFilterBtn.addEventListener('click', resetFilter);
+  categorySelect.addEventListener('change', applyFilter);
+
+  filteredProducts.sort((a, b) => b.date - a.date);
+  renderProducts(filteredProducts);
+</script>
+
+</body>
+</html>

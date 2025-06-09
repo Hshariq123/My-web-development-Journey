@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute positioning</title>
+    <style>
+        div{
+            background-color: rgb(244, 84, 84);
+        }
+        #div2{
+            position: relative;
+        }
+        #p1{
+            position: absolute;
+            top: 50px;
+            left: 100px;
+        }
+        #p2{
+             position: absolute;
+            top: 200px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <p id = "p1">This paragraph is positioned at absolute location of 50px,100px from top left corner because it's closest ancestor has no position property</p>
+    </div>
+    <div id  = "div2"><p id="p2">This paragraph is positioned at absolute location of 200px,100px from div because it's closest ancestor has a position:relative</p></div>
+</body>
+</html>

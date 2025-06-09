@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Click the button to see the effect of javascript</p>
+    <input type="checkbox" name="" id="cb1" />
+    <input type="checkbox" name="" id="cb2" />
+    <input type="button" value="Click" onclick="selectCB()" />
+    <h1 id="heading1">heading</h1>
+    <p>document.querySelector("input") selects the first checkbox</p>
+    <p>
+      document.querySelectorAll("p") selects all the paragraph i.e returns a
+      node List to change the style we have to loop over all the nodes
+    </p>
+    <p>
+      document.querySelectorAll("#heading1") selects the heading with id=
+      heading1
+    </p>
+    <script>
+      function selectCB() {
+        console.log("clicking...");
+        document.querySelector("input").click();
+        const paragraphs = document.querySelectorAll("p");
+        paragraphs.forEach((p) => {
+          p.style.fontSize = "30px"; // Correct CSS property in JS is camelCase: fontSize
+        });
+        document.querySelector("#heading1").style.color = "red";
+      }
+    </script>
+  </body>
+</html>

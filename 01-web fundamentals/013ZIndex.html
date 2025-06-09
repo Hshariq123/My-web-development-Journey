@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scalable Circle</title>
+  <style>
+    .circle {
+      background-color: rgb(125, 235, 255);
+      width: 10vw;
+      height: 10vw;
+      border: 2px solid;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      text-align: center;
+      padding: 1vw;
+    }
+
+    #div1 {
+      top: 5vw;
+      left: 5vw;
+      z-index: 1;
+    }
+
+    #div2 {
+      top: 8vw;
+      left: 10vw;
+      z-index: 2;
+    }
+
+    p {
+      margin: 0;
+      font-size: 2vw; /* Text scales with screen size */
+      background-color: rgba(217, 249, 249, 0.09);
+    }
+  </style>
+</head>
+<body>
+  <div id="div1" class="circle">
+    <p>Z Index 1</p>
+  </div>
+  <div id="div2" class="circle">
+    <p>Z Index 2</p>
+  </div>
+</body>
+</html>

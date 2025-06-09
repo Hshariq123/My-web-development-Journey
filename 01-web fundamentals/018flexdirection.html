@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            color: white;
+            background-color: black;
+        }
+        #one{
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+        }
+        #two{
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        #one div{
+            color: white;
+            flex-basis: 100px;
+        }
+        #two div{
+            color: white;
+        }
+        #div1{
+            background-color: violet;
+        }
+        #div2{
+            background-color: indigo;
+        }
+        #div3{
+            background-color: rgb(17, 112, 245);
+        }
+        #div4{
+            background-color: rgb(16, 202, 16);
+        }
+        #div5{
+            background-color: rgb(255, 255, 1);
+        }
+        #div6{
+            background-color: orange;
+        }
+        #div7{
+            background-color: red;
+        }
+    </style>
+  </head>
+  <body>
+    <h2>Flex-direction: row</h2>
+    <div id="one">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+    </div>
+    <h2>Flex-direction: column</h2>
+    <div id="two">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+    </div>
+  </body>
+</html>

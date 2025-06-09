@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="mainHeading">Hello there</h1>
+    <input type="button" value="Italicize" onclick="italicize()" />
+    <script>
+        var isItalic = false;
+      function italicize() {
+        if (!isItalic) {
+          isItalic = true;
+          document.querySelector("#mainHeading").innerHTML =
+            "<em>" +
+            document.querySelector("#mainHeading").textContent +
+            "</em>";
+        } else {
+          isItalic = false;
+          document.querySelector("#mainHeading").innerHTML =
+document.querySelector("#mainHeading").textContent ;
+        }
+      }
+    </script>
+  </body>
+</html>

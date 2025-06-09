@@ -1,0 +1,44 @@
+<!-- flexgrow -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Width property</title>
+    <style>
+        #container{
+            display: flex;
+            gap:20px;   
+        }
+        #container *{  
+             flex-shrink: 1;
+             flex-grow: 1;
+             
+            }
+      #div1 {
+        background-color: rgb(247, 204, 190);
+        border: 2px solid chocolate;
+        border-radius: 20px;
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <header id="container">
+      <div id="div1">
+        <p>
+          Each element is treated as a rectangle with four main components:
+          content, padding, border, and margin.
+        </p>
+      </div>
+      <h2 style="background-color: bisque">Heading 2</h2>
+      <p style="background-color: aquamarine">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
+        voluptatibus non tempore voluptates assumenda, quasi necessitatibus
+        recusandae officiis repellat, aliquam harum a quas quis quos laborum
+        iusto soluta nostrum molestias?
+      </p>
+    </header>
+  </body>
+</html>

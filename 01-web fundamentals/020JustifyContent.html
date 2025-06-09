@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Justify-Content</title>
+    <style>
+      body {
+        color: white;
+        background-color: black;
+      }
+      #one {
+        border: 2px solid orangered;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 5px;
+      }
+      #two {
+        border: 2px solid orangered;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 5px;
+      }
+      #three {
+        border: 2px solid orangered;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
+      #four {
+        border: 2px solid orangered;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      #one div {
+        color: white;
+        flex-basis: 100px;
+      }
+      #two div {
+        color: white;
+        flex-basis: 100px;
+      }
+      #three div {
+        flex-basis: 100px;
+      }
+      #div1 {
+        background-color: violet;
+      }
+      #div2 {
+        background-color: indigo;
+      }
+      #div3 {
+        background-color: rgb(17, 112, 245);
+      }
+      #div4 {
+        background-color: rgb(16, 202, 16);
+      }
+      #div5 {
+        background-color: rgb(255, 255, 1);
+      }
+      #div6 {
+        background-color: orange;
+      }
+      #div7 {
+        background-color: red;
+      }
+      #div8 {
+        background-color: white;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flex-direction:row</h1>
+    <h2>Justify-content:flex-start;</h2>
+    <div id="one">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+      <div id="div8">white</div>
+    </div>
+    <h2>Justify-content:flex-end;</h2>
+    <div id="two">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+      <div id="div8">white</div>
+    </div>
+    <h2>Justify-content:center</h2>
+    <div id="three">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+      <div id="div8">white</div>
+    </div>
+    <h2>Justify-content:space-between</h2>
+    <div id="four">
+      <div id="div1">voilet</div>
+      <div id="div2">indigo</div>
+      <div id="div3">blue</div>
+      <div id="div4">green</div>
+      <div id="div5">yellow</div>
+      <div id="div6">orange</div>
+      <div id="div7">red</div>
+      <div id="div8">white</div>
+    </div>
+  </body>
+</html>

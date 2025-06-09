@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam eius consequatur quia adipisci ex corrupti quae quidem, expedita, soluta corporis iusto est. Aliquid iste totam quam nostrum, quae illum dolore?</p>
+    <script type="text/javascript">
+      var heading =
+        document.firstElementChild.lastElementChild.firstElementChild;
+      var input = prompt(
+        "Do you want to change the heading ,1 for yes 0 for no"
+      );
+      var newHeading;
+      var colorAvailable = false;
+      if (input === "1") {
+        colorAvailable = true;
+        newHeading = prompt("Enter new Heading");
+        heading.innerHTML = newHeading;
+      } else if (input === "0") {
+        alert("Thank you!");
+      } else alert("Incorrect number");
+      if (colorAvailable) {
+        var choice = prompt("Do you also want to change the color of heading?");
+        if (choice === "1") {
+          heading.style.color = "red";
+        } else if (choice === "0") {
+          alert("Thank you!");
+        } else {
+          alert("Oops wrong number");
+        }
+      }
+    </script>
+  </body>
+</html>

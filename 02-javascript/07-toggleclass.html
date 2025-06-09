@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Styling</title>
+  <style>
+    .italic {
+      font-style: italic;
+    }
+
+    .bold {
+      font-weight: lighter;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .red {
+      color: red;
+    }
+
+    /* Optional: style the buttons for better appearance */
+    button {
+      margin: 5px;
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="mainHeading">Hello there</h1>
+
+  <button onclick="toggleStyle('italic')">Italic</button>
+  <button onclick="toggleStyle('bold')">Bold</button>
+  <button onclick="toggleStyle('underline')">Underline</button>
+  <button onclick="toggleStyle('red')">Red Color</button>
+
+  <script>
+    function toggleStyle(styleClass) {
+      document.getElementById("mainHeading").classList.toggle(styleClass);
+    }
+  </script>
+</body>
+</html>
